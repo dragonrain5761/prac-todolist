@@ -39,6 +39,14 @@ function App() {
     };
 
     setTodo([...todo, newTodo]);
+    setTitle("");
+    setBody("");
+  };
+
+  //삭제하기 버튼
+  const todoRemoveButtonHandler = (id) => {
+    const removeTodo = todo.filter((todo) => todo.id !== id);
+    setTodo(removeTodo);
   };
 
   return (
@@ -80,7 +88,10 @@ function App() {
                     <div>{item.body}</div>
                   </div>
                   <div className="button-set">
-                    <button className="todo-delete-button button">
+                    <button
+                      className="todo-delete-button button"
+                      onClick={() => todoRemoveButtonHandler(item.id)}
+                    >
                       삭제하기
                     </button>
                     <button className="todo-complete-button button">
@@ -104,7 +115,10 @@ function App() {
                     <div>{item.body}</div>
                   </div>
                   <div className="button-set">
-                    <button className="todo-delete-button button">
+                    <button
+                      className="todo-delete-button button"
+                      onClick={() => todoRemoveButtonHandler(item.id)}
+                    >
                       삭제하기
                     </button>
                     <button className="todo-complete-button button">
