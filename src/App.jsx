@@ -28,6 +28,18 @@ function App() {
   const bodyChangeHandler = (event) => {
     setBody(event.target.value);
   };
+  // 추가하기 버튼
+  const todoAddButtonHandler = (event) => {
+    event.preventDefault(); // form이 새로고침하는 것을 방지
+    const newTodo = {
+      id: todo.length + 1,
+      title: title,
+      body: body,
+      isDone: false,
+    };
+
+    setTodo([...todo, newTodo]);
+  };
 
   return (
     <div className="layout">
@@ -35,10 +47,11 @@ function App() {
         <div>My Todo List</div>
         <div>React</div>
       </div>
-      <form className="add-form">
+      <form className="add-form" onSubmit={todoAddButtonHandler}>
         <div className="input-group">
           <label className="form-label">제목</label>
           <input
+            value={title}
             type="text"
             name="title"
             className="add-input input-body"
@@ -46,6 +59,7 @@ function App() {
           ></input>
           <label className="form-label">내용</label>
           <input
+            value={body}
             type="text"
             name="body"
             className="add-input"
@@ -57,41 +71,50 @@ function App() {
       <div className="list-container">
         <h2 className="list-title">Working.. 🔥</h2>
         <div className="list-wrapper">
-          <div className="todo-container">
-            {todo.map((item) => {
-              if (item.isDone == false) {
-                return (
+          {todo.map((item) => {
+            if (item.isDone == false) {
+              return (
+                <div className="todo-container" key={item.id}>
                   <div>
                     <h2 className="todo-title">{item.title}</h2>
                     <div>{item.body}</div>
                   </div>
-                );
-              }
-            })}
-            <div className="button-set">
-              <button className="todo-delete-button button">삭제하기</button>
-              <button className="todo-complete-button button">완료</button>
-            </div>
-          </div>
+                  <div className="button-set">
+                    <button className="todo-delete-button button">
+                      삭제하기
+                    </button>
+                    <button className="todo-complete-button button">
+                      완료
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
+
         <h2 className="list-title">Done..! 🎉</h2>
         <div className="list-wrapper">
-          <div className="todo-container">
-            {todo.map((item) => {
-              if (item.isDone == true) {
-                return (
+          {todo.map((item) => {
+            if (item.isDone == true) {
+              return (
+                <div className="todo-container" key={item.id}>
                   <div>
                     <h2 className="todo-title">{item.title}</h2>
                     <div>{item.body}</div>
                   </div>
-                );
-              }
-            })}
-            <div className="button-set">
-              <button className="todo-delete-button button">삭제하기</button>
-              <button className="todo-complete-button button">완료</button>
-            </div>
-          </div>
+                  <div className="button-set">
+                    <button className="todo-delete-button button">
+                      삭제하기
+                    </button>
+                    <button className="todo-complete-button button">
+                      취소
+                    </button>
+                  </div>
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     </div>

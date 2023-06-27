@@ -57,6 +57,7 @@
   font-weight: 700;
   height: 40px;
   width: 140px;
+  cursor: pointer;
 }
 
 .list-container {
@@ -86,16 +87,6 @@
   width: 270px;
 }
 
-.button-set {
-  display: flex;
-  gap: 10px;
-  margin-top: 24px;
-}
-
-.delete-button.button {
-  background-color: #fff;
-  border: 2px solid red;
-}
 .button {
   border: none;
   border-radius: 8px;
@@ -104,7 +95,18 @@
   width: 50%;
 }
 
-.complete-button.button {
+.button-set {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.todo-delete-button.button {
+  background-color: #fff;
+  border: 2px solid red;
+}
+
+.todo-complete-button.button {
   background-color: #fff;
   border: 2px solid green;
 }
