@@ -19,7 +19,7 @@ function App() {
 
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [isDone, setIsdone] = useState(false);
+  const [isDone, setIsdone] = useState("");
 
   const titleChangeHandler = (event) => {
     setTitle(event.target.value);
@@ -47,6 +47,34 @@ function App() {
   const todoRemoveButtonHandler = (id) => {
     const removeTodo = todo.filter((todo) => todo.id !== id);
     setTodo(removeTodo);
+  };
+
+  //완료하기 버튼
+  const todoCompleteButtonHandler = (id) => {
+    const completeTodo = todo.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          isDone: true,
+        };
+      }
+      return item;
+    });
+    setTodo(completeTodo);
+  };
+
+  //취소하기 버튼
+  const todoCancelButtonHandler = (id) => {
+    const cancleTodo = todo.map((item) => {
+      if (item.id === id) {
+        return {
+          ...item,
+          isDone: false,
+        };
+      }
+      return item;
+    });
+    setTodo(cancleTodo);
   };
 
   return (
@@ -94,7 +122,10 @@ function App() {
                     >
                       삭제하기
                     </button>
-                    <button className="todo-complete-button button">
+                    <button
+                      className="todo-complete-button button"
+                      onClick={() => todoCompleteButtonHandler(item.id)}
+                    >
                       완료
                     </button>
                   </div>
@@ -121,7 +152,10 @@ function App() {
                     >
                       삭제하기
                     </button>
-                    <button className="todo-complete-button button">
+                    <button
+                      className="todo-complete-button button"
+                      onClick={() => todoCancelButtonHandler(item.id)}
+                    >
                       취소
                     </button>
                   </div>
